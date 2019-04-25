@@ -20,6 +20,14 @@ void draw(){
   P2.drawHero();
   //calc hitboxes
   //accelerate
+  if(P1MovingRight)
+    P1.addAccel(4,0);
+  if(P1MovingLeft)
+    P1.addAccel(-4,0);
+  if(P2MovingRight)
+    P2.addAccel(4,0);
+  if(P2MovingLeft)
+    P2.addAccel(-4,0);
   P1.accelerate();
   P2.accelerate();
 }
@@ -27,27 +35,27 @@ void draw(){
 void keyPressed(){
   switch(keyCode){
     case 65:
-      P1.addAccel(-20,0);
+      P1.addAccel(-10,0);
       P1MovingLeft = true;
       break;
     case 83:
-      P1.addAccel(20,0);
+      P1.addAccel(10,0);
       P1MovingRight = true;
       break;
     case 70:
-      P1.addAccel(0,20);
+      P1.addAccel(0,16);
       P1.jump();
       break;
     case 72:
-      P2.addAccel(-20,0);
+      P2.addAccel(-10,0);
       P2MovingLeft = true;
       break;
     case 74:
-      P2.addAccel(20,0);
+      P2.addAccel(10,0);
       P2MovingRight = true;
       break;
     case 76:
-      P2.addAccel(0,20);
+      P2.addAccel(0,16);
       P2.jump();
       break;
   }
