@@ -7,8 +7,8 @@ boolean P1MovingLeft = false;
 boolean P2MovingLeft = false;
 void setup(){
   size(1000,1000);
-  P1 = new Knight(50,50);
-  P2 = new Knight(50,60);
+  P1 = new Knight(350,50);
+  P2 = new Knight(250,60);
   g = new Level();
 }
 

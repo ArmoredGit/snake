@@ -39,10 +39,23 @@ public class Knight{
   //draw character
   public void drawHero(){
     ellipse(_X, _Y, width / _Size, height / _Size);
+    if(_aclX > 0)
+      ellipse(_X+15+(height/(2*_Size)),_Y,20,20);
+    else
+      ellipse(_X-15-(height/(2*_Size)),_Y,20,20);
   }
   //get character def hitboxes
-  
+  public boolean defHit(){
+    return false;
+  }
+    
   //get attack hit boxes
+  public int[] attackHit(){
+    int[] j = {_X+15+(height/(2*_Size)),_Y,20,_X,_Y};
+    if(_aclX > 0)
+      j[0] -= (15+(height/(2*_Size)));
+    return j;
+  }
   
   //add aceleration
   public void addAccel(int aclX, int aclY){
@@ -50,10 +63,10 @@ public class Knight{
     if(aclY > 0)
       _aclY = 0;
     _aclY += aclY;
-    if(_aclX > 30)
-      _aclX= 30;
-    if(_aclX < -30)
-      _aclX= -30;
+    if(_aclX > 10)
+      _aclX= 10;
+    if(_aclX < -10)
+      _aclX= -10;
     if(_aclY < -50)
       _aclY= -50;
   }
