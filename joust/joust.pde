@@ -5,20 +5,34 @@ boolean P1MovingRight = false;
 boolean P2MovingRight = false;
 boolean P1MovingLeft = false;
 boolean P2MovingLeft = false;
+int P1Kills;
+int P2Kills;
 void setup(){
   size(1000,1000);
   P1 = new Knight(350,50);
   P2 = new Knight(250,60);
   g = new Level();
+  P1Kills = 0;
+  P2Kills = 0;
 }
 
 void draw(){
   //draw background
   g.drawLevel();
+  text("p1 : " + P1Kills,50,50);
+  text("p2 : " + P2Kills,500,50);
   //draw foreground an characters
   P1.drawHero();
   P2.drawHero();
   //calc hitboxes
+  if(P1.defHit(P2.attackHit())){
+    P1 = new Knight(350,50);
+    P2Kills++;
+  }
+  if(P2.defHit(P1.attackHit())){
+    P2 = new Knight(250,50);
+    P1Kills++;
+  }
   //accelerate
   if(P1MovingRight)
     P1.addAccel(4,0);

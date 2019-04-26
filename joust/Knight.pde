@@ -4,6 +4,7 @@ public class Knight{
   private int _Y;
   private int _aclX;
   private int _aclY;
+  private boolean faceing;
   
   public Knight(int x, int y){
     _Size = 15;
@@ -11,6 +12,7 @@ public class Knight{
     _Y = y;
     _aclX = 0;
     _aclY = 0;
+    faceing = true;
   }
   
   //accelerate character
@@ -39,20 +41,23 @@ public class Knight{
   //draw character
   public void drawHero(){
     ellipse(_X, _Y, width / _Size, height / _Size);
-    if(_aclX > 0)
+    if(faceing)
       ellipse(_X+15+(height/(2*_Size)),_Y,20,20);
     else
       ellipse(_X-15-(height/(2*_Size)),_Y,20,20);
   }
   //get character def hitboxes
-  public boolean defHit(){
+  public boolean defHit(int[] hit){
+    if(hit[4] > _Y && (sqrt(((_X - hit[0]) * (_X - hit[0])) + ((_Y - hit[1]) * (_Y - hit[1]))) < (width / (_Size * 2)) + hit[2])){
+      return true;
+    }
     return false;
   }
     
   //get attack hit boxes
   public int[] attackHit(){
-    int[] j = {_X+15+(height/(2*_Size)),_Y,20,_X,_Y};
-    if(_aclX > 0)
+    int[] j = {_X+15+(height/(2*_Size)),_Y+1,10,_X,_Y};
+    if(faceing)
       j[0] -= (15+(height/(2*_Size)));
     return j;
   }
@@ -69,5 +74,9 @@ public class Knight{
       _aclX= -10;
     if(_aclY < -50)
       _aclY= -50;
+    if(_aclX > 0)
+      faceing = true;
+    if(_aclX < 0)
+      faceing = false;
   }
 }
