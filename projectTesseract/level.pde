@@ -21,6 +21,26 @@ public class levelSlicer{
     teseract = arr;
   }
   
+  public void setCords(int x, int y, int z, int w){
+    _x = x;
+    _y = y;
+    _z = z;
+    _w = w;
+  }
+  
+  public void setSubCords(int x, int y){
+    if(_rotation == 1){
+      _y = y;
+      _x = x;
+    }else if(_rotation == 2){
+      _z = y;
+      _x = x;
+    }else if(_rotation == 3){
+      _w = y;
+      _x = x;
+    }
+  }
+  
   public int[][] getSlice(){
     // get the 2D slice of the tesseract
     int[][] arr = new int[_size][_size];
@@ -56,9 +76,8 @@ public class levelSlicer{
       teseract[y][_z][_y][x] = set;
   }
   
-  public boolean setSubSquare(int x, int y, int z, int w, int set){
+  public void setSquare(int x, int y, int z, int w, int set){
     //sets the point in the tesseract via 4d point
     teseract[w][z][y][x] = set;
-    return true;
   }
 }

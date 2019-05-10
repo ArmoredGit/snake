@@ -31,7 +31,7 @@ public class library{
   
   public int[][][][] demoMapSelecter(int level){
     int[][][][] a = {{
-      {{0,10,0,10},{10,0,10,0},{0,10,0,10},{10,0,10,0}}}};
+      {{0,10,0,11},{10,0,10,1},{0,10,0,11},{10,0,10,1}}}};
     switch(level){
       default:
         return a;
