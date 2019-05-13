@@ -14,7 +14,7 @@ public class library{
   }
   
   public int[][][][][] menuSelecter(int level){
-    int[][][][][] a = {{{{{3,1,1}}}},demoMapSelecter(level)};
+    int[][][][][] a = {{{{{3,1,3}}}},menuMapSelecter(level)};
     switch(level){
       default:
         return a;
@@ -22,7 +22,7 @@ public class library{
   }
   
   public int[][][][][] levelSelecter(int level){
-    int[][][][][] a = {{{{{3,1,1}}}},demoMapSelecter(level)};
+    int[][][][][] a = {{{{{3,1,1}}}},levelMapSelecter(level)};
     switch(level){
       default:
         return a;
@@ -31,7 +31,7 @@ public class library{
   
   public int[][][][] demoMapSelecter(int level){
     int[][][][] a = {{
-      {{0,10,0,11},{10,0,10,1},{0,10,0,11},{10,0,10,1}}}};
+      {{0,0,2,0},{0,3,0,0},{0,0,0,0},{0,0,0,0}}}};
     switch(level){
       default:
         return a;
@@ -39,8 +39,19 @@ public class library{
   }
   
   public int[][][][] menuMapSelecter(int level){
-    int[][][][] a = {{{{
-      1,10,1},{10,12,1},{11,3,4}}}};
+    int[][][][] a = {{
+      {{0,0,0},  {1,1,1},  {0,0,0}},
+      {{0,1,0},  {0,1,1},  {0,0,1}},
+      {{1,0,0},  {0,0,0},  {0,0,1}}},
+      {
+      {{1,1,1},  {0,1,1},  {0,0,1}},
+      {{0,1,1},  {1,2,0},  {0,1,0}},
+      {{0,0,0},  {1,1,1},  {0,1,0}}},
+      {
+      {{0,0,0},  {0,0,0},  {1,1,0}},
+      {{1,0,0},  {0,1,1},  {0,0,1}},
+      {{0,0,1},  {0,1,0},  {1,0,0}}}};
+      
     switch(level){
       default:
         return a;

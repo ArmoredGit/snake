@@ -1,9 +1,9 @@
 public class levelSlicer{
   private int _size,_planeCount,_rotation;
-  int _x;
-  int _y;
-  int _z;
-  int _w;
+  private int _x;
+  private int _y;
+  private int _z;
+  private int _w;
   private int[][][][] teseract;
   public levelSlicer(int size, int plane, int planes){
     _size = size;
@@ -11,6 +11,11 @@ public class levelSlicer{
     _rotation = plane;
     teseract = new int[size][size][size][size];
     //iterate and fill with 0
+    view = "X/Y";
+    _x = 0;
+    _y = 0;
+    _z = 0;
+    _w = 0;
   }
   
   //marking scheme for teserct w z y x
@@ -26,6 +31,11 @@ public class levelSlicer{
     _y = y;
     _z = z;
     _w = w;
+  }
+  
+  public int[] getCords(){
+    int[] arr = {_x,_y,_z,_w};
+    return arr;
   }
   
   public void setSubCords(int x, int y){
@@ -66,14 +76,34 @@ public class levelSlicer{
     //swaps to the next plane ex. xy to xz
   }
   
-  public void setSubSquare(int x, int y, int set){
+  public int fixY(){
+    if(_rotation == 1){
+      view = "X/Y";
+      return _y;
+    }else if(_rotation == 2){
+      view = "X/Z";
+      return _z;
+    }else if(_rotation == 3){
+      view = "X/W";
+      return _w;
+    }
+    return _y;
+  }
+  
+  public int setSubSquare(int x, int y, int set){
     //sets the point in the tesseract by giving 2d cords of the slice
-    if(_rotation == 1)
+    int i = 0;
+    if(_rotation == 1){
+      i = teseract[_w][_z][y][x];
       teseract[_w][_z][y][x] = set;
-    else if(_rotation == 2)
+    }else if(_rotation == 2){
+      i = teseract[_w][y][_y][x];
       teseract[_w][y][_y][x] = set;
-    else if(_rotation == 3)
+    }else if(_rotation == 3){
+      i = teseract[y][_z][_y][x];
       teseract[y][_z][_y][x] = set;
+    }
+    return i;
   }
   
   public void setSquare(int x, int y, int z, int w, int set){
