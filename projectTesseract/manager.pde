@@ -5,11 +5,11 @@ public class manager extends levelSlicer{
     super(0,0,0);
   }
   public manager(int x, int y,int level){
-    super(li.menuSelecter(level)[0][0][0][0][0],li.menuSelecter(level)[0][0][0][0][1],li.menuSelecter(level)[0][0][0][0][2]);
-    setLevel(li.menuSelecter(level)[1]);
+    super(li.levelSelecter(level)[0][0][0][0][0],li.levelSelecter(level)[0][0][0][0][1],li.levelSelecter(level)[0][0][0][0][2]);
+    setLevel(li.levelSelecter(level)[1]);
     _tx = x;
     _ty = y;
-    _size = li.menuSelecter(level)[0][0][0][0][0];
+    _size = li.levelSelecter(level)[0][0][0][0][0];
   }
   
   public void move(int direction){
