@@ -106,6 +106,38 @@ public class levelSlicer{
     return i;
   }
   
+  public void pushCube(int x, int y, int augment){
+    //pushes a block at xy in the direcrtion augment 
+    if(_rotation == 1){
+      teseract[_w][_z][y][x] -= 3;
+    }else if(_rotation == 2){
+      teseract[_w][y][_y][x] -= 3;
+    }else if(_rotation == 3){
+      teseract[y][_z][_y][x] -= 3;
+    }
+    switch(augment){
+      case 1:
+        x++;
+        break;
+      case 2:
+        y++;
+        break;
+      case 3:
+        x--;
+        break;
+      case 4:
+        y--;
+        break;
+    }
+    if(_rotation == 1){
+      teseract[_w][_z][y][x] += 3;
+    }else if(_rotation == 2){
+      teseract[_w][y][_y][x] += 3;
+    }else if(_rotation == 3){
+      teseract[y][_z][_y][x] += 3;
+    }
+  }
+  
   public void setSquare(int x, int y, int z, int w, int set){
     //sets the point in the tesseract via 4d point
     teseract[w][z][y][x] = set;

@@ -1,4 +1,5 @@
 boolean win = false;
+PImage event1;
 PImage player;
 PImage evenFloor;
 PImage evenWall;
@@ -14,6 +15,7 @@ void setup(){
   textSize(50);
   player = loadImage("character.png");
   evenFloor = loadImage("evenFloor.png");
+  event1 = loadImage("evenFloor.png");
   evenWall = loadImage("evenWall.png");
   oddFloor = loadImage("oddFloor.png");
   oddWall = loadImage("oddWall.png");

@@ -5,11 +5,11 @@ public class manager extends levelSlicer{
     super(0,0,0);
   }
   public manager(int x, int y,int level){
-    super(li.menuSelecter(level)[0][0][0][0][0],li.menuSelecter(level)[0][0][0][0][1],li.menuSelecter(level)[0][0][0][0][2]);
-    setLevel(li.menuSelecter(level)[1]);
+    super(li.levelSelecter(level)[0][0][0][0][0],li.levelSelecter(level)[0][0][0][0][1],li.levelSelecter(level)[0][0][0][0][2]);
+    setLevel(li.levelSelecter(level)[1]);
     _tx = x;
     _ty = y;
-    _size = li.menuSelecter(level)[0][0][0][0][0];
+    _size = li.levelSelecter(level)[0][0][0][0][0];
   }
   
   public void move(int direction){
@@ -22,9 +22,9 @@ public class manager extends levelSlicer{
           _tx = _size - 1;
         if(getSlice()[_tx][_ty]%10 == 1)
           _tx--;
-        if(getSlice()[_tx][_ty]%10 == 3)
+        if(getSlice()[_tx][_ty]%10 == 3 || getSlice()[_tx][_ty]%10 == 7)
           if(pushBlocks(1))
-            setSubSquare(_tx + 1,_ty,setSubSquare(_tx,_ty,0));
+            pushCube(_tx,_ty,1);
         break;
       case 2:
         _ty++;
@@ -32,9 +32,9 @@ public class manager extends levelSlicer{
           _ty = _size - 1;
         if(getSlice()[_tx][_ty]%10 == 1)
           _ty--;
-        if(getSlice()[_tx][_ty]%10 == 3)
+        if(getSlice()[_tx][_ty]%10 == 3 || getSlice()[_tx][_ty]%10 == 7)
           if(pushBlocks(2))
-            setSubSquare(_tx,_ty + 1,setSubSquare(_tx,_ty,0));
+            pushCube(_tx,_ty,2);
         break;
       case 3:
         _tx--;
@@ -42,9 +42,9 @@ public class manager extends levelSlicer{
           _tx = 0;
         if(getSlice()[_tx][_ty]%10 == 1)
           _tx++;
-        if(getSlice()[_tx][_ty]%10 == 3)
+        if(getSlice()[_tx][_ty]%10 == 3 || getSlice()[_tx][_ty]%10 == 7)
           if(pushBlocks(3))
-            setSubSquare(_tx - 1,_ty,setSubSquare(_tx,_ty,0));
+            pushCube(_tx,_ty,3);
         break;
       case 4:
         _ty--;
@@ -52,9 +52,9 @@ public class manager extends levelSlicer{
           _ty = 0;
         if(getSlice()[_tx][_ty]%10 == 1)
           _ty++;
-        if(getSlice()[_tx][_ty]%10 == 3)
+        if(getSlice()[_tx][_ty]%10 == 3 || getSlice()[_tx][_ty]%10 == 7)
           if(pushBlocks(4))
-            setSubSquare(_tx,_ty - 1,setSubSquare(_tx,_ty,0));
+            pushCube(_tx,_ty,4);
         break;
     }
     setSubCords(_tx,_ty);
@@ -67,7 +67,7 @@ public class manager extends levelSlicer{
         if(_tx + 1 > _size - 1){
           _tx = _size - 2;
           return false;
-        }else if(getSlice()[_tx + 1][_ty]%10 != 0){
+        }else if(getSlice()[_tx + 1][_ty]%10 != 0 && getSlice()[_tx + 1][_ty]%10 != 4){
           _tx--;
           return false;
         }
@@ -76,7 +76,7 @@ public class manager extends levelSlicer{
         if(_ty + 1 > _size - 1){
           _ty = _size - 2;
           return false;
-        }else if(getSlice()[_tx][_ty + 1]%10 != 0){
+        }else if(getSlice()[_tx][_ty + 1]%10 != 0 && getSlice()[_tx][_ty + 1]%10 != 4){
           _ty--;
           return false;
         }
@@ -85,7 +85,7 @@ public class manager extends levelSlicer{
         if(_tx - 1 < 0){
           _tx = 1;
           return false;
-        }else if(getSlice()[_tx - 1][_ty]%10 != 0){
+        }else if(getSlice()[_tx - 1][_ty]%10 != 0 && getSlice()[_tx - 1][_ty]%10 != 4){
           _tx++;
           return false;
         }
@@ -94,7 +94,7 @@ public class manager extends levelSlicer{
         if(_ty - 1 < 0){
           _ty = 1;
           return false;
-        }else if(getSlice()[_tx][_ty - 1]%10 != 0){
+        }else if(getSlice()[_tx][_ty - 1]%10 != 0 && getSlice()[_tx][_ty - 1]%10 != 4){
           _ty++;
           return false;
         }
@@ -108,36 +108,71 @@ public class manager extends levelSlicer{
     _ty = fixY();
     int w = width * 9 / 10;
     int a = width * 1 / 10;
-    int l = getSlice().length;
+    int[][] arr = getSlice();
+    int l = arr.length;
     for(int i = 0; i < l; i++){
       for(int j = 0; j < l; j++){
         if((i%2 == 1)?j%2 == 1:j%2 == 0){
           fill(120,160,73);
           image(evenFloor,i * w / l, a + j * w / l, w / l, w / l);
-          if(getSlice()[i][j]%10 == 1){
+          if(arr[i][j]%10 == 1){
             fill(37, 48, 24);
             image(evenWall,i * w / l, a + j * w / l, w / l, w / l);
           }
         }else{
           fill(180,220,133);
           image(oddFloor,i * w / l, a + j * w / l, w / l, w / l);
-          if(getSlice()[i][j]%10 == 1){
+          if(arr[i][j]%10 == 1){
             fill(75, 89, 59);
             image(oddWall,i * w / l, a + j * w / l, w / l, w / l);
           }
         }
-        if(getSlice()[i][j]%10 == 2){
+        if(arr[i][j]%10 == 2){
           fill(232, 215, 30);
           rect(i * w / l, a + j * w / l, w / l, w / l);
-        }else if(getSlice()[i][j]%10 == 3){
+        }else if(arr[i][j]%10 == 3){
           fill(233, 65, 242);
           rect(i * w / l, a + j * w / l, w / l, w / l);
+        }else if(arr[i][j]%10 == 4){
+          image(e.activeEventdraw(arr[i][j]/10),i * w / l, a + j * w / l, w / l, w / l);
+        }else if(arr[i][j]%10 == 5){
+          fill(233, 65, 242);
+          rect(i * w / l, a + j * w / l, w / l, w / l);
+        }else if(arr[i][j]%10 == 6){
+          fill(233, 65, 242);
+          rect(i * w / l, a + j * w / l, w / l, w / l);
+        }else if(arr[i][j]%10 == 7){
+          image(e.activeEventdraw(arr[i][j]/10),i * w / l, a + j * w / l, w / l, w / l);
         }
       }
     }
+    if(getSlice()[_tx][_ty]%10 == 4)
+      image(e.pActiveEventdraw(arr[_tx][_ty]/10),_tx * w / l, a + _ty * w / l, w / l, w / l);
     fill(250);
     image(player,_tx * w / l, a + _ty * w / l, w / l, w / l);
-    if(getSlice()[_tx][_ty]%10 == 2)
+    if(arr[_tx][_ty]%10 == 2)
       text("! YOU DID IT !", width / 4, width / 2);
+  }
+  
+  public void triggerEvents(){
+    //serches for events and triggers them and undose them if req are no longer met
+    int l = getSlice().length;
+    int[][] arr = getSlice();
+    for(int i = 0; i < l; i++){
+      for(int j = 0; j < l; j++){
+        if((arr[i][j]%10 == 4 && _tx == i && _ty == j) || (arr[i][j]%10 == 7)){
+          
+        }
+      }
+    }
+    
+    for(int i = 0; i < l; i++){
+      for(int j = 0; j < l; j++){
+        if((arr[i][j]%10 == 4 && _tx == i && _ty == j) || (arr[i][j]%10 == 7)){
+          
+        }
+      }
+    }
+    
   }
 }
