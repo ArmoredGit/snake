@@ -1,15 +1,29 @@
 public class manager extends levelSlicer{
   private int _tx,_ty;
-  private int _size;
+  private int _size,_level;
   public manager(){
     super(0,0,0);
   }
   public manager(int x, int y,int level){
-    super(li.levelSelecter(level)[0][0][0][0][0],li.levelSelecter(level)[0][0][0][0][1],li.levelSelecter(level)[0][0][0][0][2]);
-    setLevel(li.levelSelecter(level)[1]);
+    super(li.menuSelecter(level)[0][0][0][0][0],li.menuSelecter(level)[0][0][0][0][1],li.menuSelecter(level)[0][0][0][0][2]);
+    _level = level;
+    setLevel(li.menuSelecter(level)[1]);
     _tx = x;
     _ty = y;
-    _size = li.levelSelecter(level)[0][0][0][0][0];
+    _size = li.menuSelecter(level)[0][0][0][0][0];
+  }
+  
+  public void restart(){
+    super.restart(li.levelSelecter(_level)[0][0][0][0][0],li.levelSelecter(_level)[0][0][0][0][1],li.levelSelecter(_level)[0][0][0][0][2]);
+    setLevel(li.levelSelecter(_level)[1]);
+    _tx = 0;
+    _ty = 0;
+    _size = li.levelSelecter(_level)[0][0][0][0][0];
+  }
+  
+  public void nextLevel(){
+    _level++;
+    restart();
   }
   
   public void move(int direction){
@@ -131,10 +145,9 @@ public class manager extends levelSlicer{
           fill(232, 215, 30);
           rect(i * w / l, a + j * w / l, w / l, w / l);
         }else if(arr[i][j]%10 == 3){
-          fill(233, 65, 242);
-          rect(i * w / l, a + j * w / l, w / l, w / l);
+          image(Block,i * w / l, a + j * w / l, w / l, w / l);
         }else if(arr[i][j]%10 == 4){
-          image(e.activeEventdraw(arr[i][j]/10),i * w / l, a + j * w / l, w / l, w / l);
+          image(e.eventdraw(arr[i][j]/10),i * w / l, a + j * w / l, w / l, w / l);
         }else if(arr[i][j]%10 == 5){
           fill(233, 65, 242);
           rect(i * w / l, a + j * w / l, w / l, w / l);
@@ -161,15 +174,15 @@ public class manager extends levelSlicer{
     for(int i = 0; i < l; i++){
       for(int j = 0; j < l; j++){
         if((arr[i][j]%10 == 4 && _tx == i && _ty == j) || (arr[i][j]%10 == 7)){
-          
+          e.event(arr[i][j]/10);
         }
       }
     }
     
     for(int i = 0; i < l; i++){
       for(int j = 0; j < l; j++){
-        if((arr[i][j]%10 == 4 && _tx == i && _ty == j) || (arr[i][j]%10 == 7)){
-          
+        if((arr[i][j]%10 != 4 || _tx != i || _ty != j) && (arr[i][j]%10 != 7)){
+          e.undoEvent(arr[i][j]/10);
         }
       }
     }

@@ -10,7 +10,18 @@ public class levelSlicer{
     _planeCount = planes;
     _rotation = plane;
     teseract = new int[size][size][size][size];
-    //iterate and fill with 0
+    view = "X/Y";
+    _x = 0;
+    _y = 0;
+    _z = 0;
+    _w = 0;
+  }
+  
+  public void restart(int size, int plane, int planes){
+    _size = size;
+    _planeCount = planes;
+    _rotation = plane;
+    teseract = new int[size][size][size][size];
     view = "X/Y";
     _x = 0;
     _y = 0;
