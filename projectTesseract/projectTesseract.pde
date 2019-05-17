@@ -17,14 +17,20 @@ PImage levelButton6;
 PImage levelButton7;
 PImage levelButton8;
 PImage levelButton9;
+PImage Pop;
+PImage Popbox;
+PImage lava;
 int playState = 0;
 String view;
 library li = new library();
 manager p = new manager(0,0,1);
 eventTiles e = new eventTiles();
+Menu m = new Menu();
+PopUp q = new PopUp();
 void setup(){
-  size(1000,1000);
-  textSize(50);
+  textAlign(CENTER);
+  size(1008,1008);
+  textSize(40);
   player = loadImage("character.png");
   evenFloor = loadImage("evenFloor.png");
   button = loadImage("unPressedButton.png");
@@ -43,19 +49,36 @@ void setup(){
   levelButton7 = loadImage("level7.png");
   levelButton8 = loadImage("level8.png");
   levelButton9 = loadImage("level9.png");
+  Pop = loadImage("PopupBoard.png");
+  Popbox = loadImage("PopupButton.png");
+  lava = loadImage("lava.png");
 }
 
 void draw(){
   if(playState == 0){
     background(0);
-    text("[ Press key to Play ]", width / 4, width / 2);
+    text("[ Press key to Play ]", width / 2, width / 2);
   }else if(playState == 1){
     background(0);
     p.drawGame();
     p.triggerEvents();
     fill(255);
     int[] pos = p.getCords();
-    text("X: " + pos[0] + ", Y: " + pos[1] + ", Z: " + pos[2] + ", W: " + pos[3] + ", view is " + view, width / 11, width / 11);
+    text("X: " + pos[0] + ", Y: " + pos[1] + ", Z: " + pos[2] + ", W: " + pos[3] + ", view is " + view, width / 2, width / 11);
+  }else if(playState == 3){
+    q.drawPopUp();
+  }else if(playState == 4){
+    background(255);
+    m.drawGame();
+    m.triggerEvents();
+    fill(0);
+    text("world #" + m.worldNum(), width / 2, width / 11);
+  }else if(playState == 5){
+    background(0);
+    fill(255, 60, 25);
+    text("Well, you died...", width / 2, width / 4);
+    fill(255);
+    text("[ Press key to Play ]", width / 2, width / 2);
   }
 }
 
@@ -89,5 +112,33 @@ void keyPressed(){
         p.nextLevel();
         break;
     }
+  }else if(playState == 3){
+    switch(keyCode){
+      case 81:
+        p.nextLevel();
+        playState = 1;
+        break;
+      case 69:
+        m.warpWorld();
+        playState = 4;
+        break;
+    }
+  }else if(playState == 4){
+    switch(keyCode){
+      case 87:
+        m.move(4);
+        break;
+      case 65:
+        m.move(3);
+        break;
+      case 83:
+        m.move(2);
+        break;
+      case 68:
+        m.move(1);
+        break;
+    }
+  }else if(playState == 5){
+    playState = 1;
   }
 }

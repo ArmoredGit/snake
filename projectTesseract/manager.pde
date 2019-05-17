@@ -5,12 +5,12 @@ public class manager extends levelSlicer{
     super(0,0,0);
   }
   public manager(int x, int y,int level){
-    super(li.menuSelecter(level)[0][0][0][0][0],li.menuSelecter(level)[0][0][0][0][1],li.menuSelecter(level)[0][0][0][0][2]);
+    super(li.levelSelecter(level)[0][0][0][0][0],li.levelSelecter(level)[0][0][0][0][1],li.levelSelecter(level)[0][0][0][0][2]);
     _level = level;
-    setLevel(li.menuSelecter(level)[1]);
+    setLevel(li.levelSelecter(level)[1]);
     _tx = x;
     _ty = y;
-    _size = li.menuSelecter(level)[0][0][0][0][0];
+    _size = li.levelSelecter(level)[0][0][0][0][0];
   }
   
   public void restart(){
@@ -24,6 +24,16 @@ public class manager extends levelSlicer{
   public void nextLevel(){
     _level++;
     restart();
+  }
+  
+  public void setLevel(int x){
+    _level = x;
+    restart();
+  }
+  
+  public void kill(){
+    restart();
+    playState = 5;
   }
   
   public void move(int direction){
@@ -120,8 +130,8 @@ public class manager extends levelSlicer{
   public void drawGame(){
     //draws the full game that you can see projected
     _ty = fixY();
-    int w = width * 9 / 10;
-    int a = width * 1 / 10;
+    int w = width * 7 / 8;
+    int a = width * 1 / 8;
     int[][] arr = getSlice();
     int l = arr.length;
     for(int i = 0; i < l; i++){
@@ -149,8 +159,7 @@ public class manager extends levelSlicer{
         }else if(arr[i][j]%10 == 4){
           image(e.eventdraw(arr[i][j]/10),i * w / l, a + j * w / l, w / l, w / l);
         }else if(arr[i][j]%10 == 5){
-          fill(233, 65, 242);
-          rect(i * w / l, a + j * w / l, w / l, w / l);
+          image(lava,i * w / l, a + j * w / l, w / l, w / l);
         }else if(arr[i][j]%10 == 6){
           fill(233, 65, 242);
           rect(i * w / l, a + j * w / l, w / l, w / l);
@@ -163,8 +172,12 @@ public class manager extends levelSlicer{
       image(e.pActiveEventdraw(arr[_tx][_ty]/10),_tx * w / l, a + _ty * w / l, w / l, w / l);
     fill(250);
     image(player,_tx * w / l, a + _ty * w / l, w / l, w / l);
-    if(arr[_tx][_ty]%10 == 2)
-      text("! YOU DID IT !", width / 4, width / 2);
+    if(arr[_tx][_ty]%10 == 2){
+      text("! YOU DID IT !",_tx * w / l, a + _ty * w / l, w / l, w / l);
+      q.ask();
+    }else if(arr[_tx][_ty]%10 == 5){
+      kill();
+    }
   }
   
   public void triggerEvents(){

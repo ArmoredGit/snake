@@ -16,6 +16,42 @@ public class eventTiles{
       case 4:
         p.setSubSquare(1,3,1);
         break;
+      case 5:
+        p.setLevel(1);
+        playState = 1;
+        break;
+      case 6:
+        p.setLevel(2);
+        playState = 1;
+        break;
+      case 7:
+        p.setLevel(3);
+        playState = 1;
+        break;
+      case 8:
+        p.setLevel(4);
+        playState = 1;
+        break;
+      case 9:
+        p.setLevel(5);
+        playState = 1;
+        break;
+      case 10:
+        p.setLevel(6);
+        playState = 1;
+        break;
+      case 11:
+        p.setLevel(7);
+        playState = 1;
+        break;
+      case 12:
+        p.setLevel(8);
+        playState = 1;
+        break;
+      case 13:
+        p.setLevel(9);
+        playState = 1;
+        break;
       default:
         break;
     }
