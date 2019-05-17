@@ -175,7 +175,8 @@ public class manager extends levelSlicer{
     if(arr[_tx][_ty]%10 == 2){
       text("! YOU DID IT !",_tx * w / l, a + _ty * w / l, w / l, w / l);
       q.ask();
-    }else if(arr[_tx][_ty]%10 == 5){
+    }
+    if(arr[_tx][_ty]%10 == 5){
       kill();
     }
   }
@@ -202,7 +203,7 @@ public class manager extends levelSlicer{
     
     for(int i = 0; i < l; i++){
       for(int j = 0; j < l; j++){
-        if(arr[i][j]%10 != 5 ){
+        if(arr[i][j]%10 == 8 ){
           setSubSquare(i,j,5);
         }
       }
