@@ -200,5 +200,12 @@ public class manager extends levelSlicer{
       }
     }
     
+    for(int i = 0; i < l; i++){
+      for(int j = 0; j < l; j++){
+        if(arr[i][j]%10 != 5 ){
+          setSubSquare(i,j,5);
+        }
+      }
+    }
   }
 }
