@@ -91,7 +91,7 @@ public class manager extends levelSlicer{
         if(_tx + 1 > _size - 1){
           _tx = _size - 2;
           return false;
-        }else if(getSlice()[_tx + 1][_ty]%10 != 0 && getSlice()[_tx + 1][_ty]%10 != 4){
+        }else if(getSlice()[_tx + 1][_ty]%10 == 2 && getSlice()[_tx + 1][_ty]%10 == 1){
           _tx--;
           return false;
         }
@@ -100,7 +100,7 @@ public class manager extends levelSlicer{
         if(_ty + 1 > _size - 1){
           _ty = _size - 2;
           return false;
-        }else if(getSlice()[_tx][_ty + 1]%10 != 0 && getSlice()[_tx][_ty + 1]%10 != 4){
+        }else if(getSlice()[_tx][_ty + 1]%10 == 2 && getSlice()[_tx][_ty + 1]%10 == 1){
           _ty--;
           return false;
         }
@@ -109,7 +109,7 @@ public class manager extends levelSlicer{
         if(_tx - 1 < 0){
           _tx = 1;
           return false;
-        }else if(getSlice()[_tx - 1][_ty]%10 != 0 && getSlice()[_tx - 1][_ty]%10 != 4){
+        }else if(getSlice()[_tx - 1][_ty]%10 == 2 && getSlice()[_tx - 1][_ty]%10 == 1){
           _tx++;
           return false;
         }
@@ -118,7 +118,7 @@ public class manager extends levelSlicer{
         if(_ty - 1 < 0){
           _ty = 1;
           return false;
-        }else if(getSlice()[_tx][_ty - 1]%10 != 0 && getSlice()[_tx][_ty - 1]%10 != 4){
+        }else if(getSlice()[_tx][_ty - 1]%10 == 2 && getSlice()[_tx][_ty - 1]%10 == 1){
           _ty++;
           return false;
         }
