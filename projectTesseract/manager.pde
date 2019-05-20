@@ -161,10 +161,13 @@ public class manager extends levelSlicer{
         }else if(arr[i][j]%10 == 5){
           image(lava,i * w / l, a + j * w / l, w / l, w / l);
         }else if(arr[i][j]%10 == 6){
-          fill(233, 65, 242);
-          rect(i * w / l, a + j * w / l, w / l, w / l);
+          image(grid,i * w / l, a + j * w / l, w / l, w / l);
         }else if(arr[i][j]%10 == 7){
           image(e.activeEventdraw(arr[i][j]/10),i * w / l, a + j * w / l, w / l, w / l);
+        }else if(arr[i][j]%10 == 8){
+          image(lavaBurn,i * w / l, a + j * w / l, w / l, w / l);
+        }else if(arr[i][j]%10 == 9){
+          image(gridBurn,i * w / l, a + j * w / l, w / l, w / l);
         }
       }
     }
@@ -205,6 +208,9 @@ public class manager extends levelSlicer{
       for(int j = 0; j < l; j++){
         if(arr[i][j]%10 == 8 ){
           setSubSquare(i,j,5);
+        }
+        if(arr[i][j]%10 == 9 ){
+          setSubSquare(i,j,6);
         }
       }
     }

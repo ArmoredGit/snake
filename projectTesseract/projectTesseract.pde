@@ -20,6 +20,9 @@ PImage levelButton9;
 PImage Pop;
 PImage Popbox;
 PImage lava;
+PImage lavaBurn;
+PImage grid;
+PImage gridBurn;
 int playState = 0;
 String view;
 library li = new library();
@@ -52,6 +55,9 @@ void setup(){
   Pop = loadImage("PopupBoard.png");
   Popbox = loadImage("PopupButton.png");
   lava = loadImage("lava.png");
+  lavaBurn = loadImage("lavaBurn.png");
+  grid = loadImage("grid.png");
+  gridBurn = loadImage("gridBurn.png");
 }
 
 void draw(){

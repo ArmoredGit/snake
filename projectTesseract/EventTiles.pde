@@ -72,7 +72,7 @@ public class eventTiles{
         p.setSubSquare(1,0,1);
         break;
       case 4:
-        p.setSubSquare(1,3,1);
+        p.setSubSquare(1,3,0);
         break;
       case 14:
         p.setSubSquare(2,4,1);
